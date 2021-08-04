@@ -39,3 +39,9 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+const x=document.querySelector('.btn--scroll-to');
+const section1=document.getElementById('section--1');
+x.addEventListener('click',function(e){
+  section1.scrollIntoView({behavior:"smooth"});
+})
