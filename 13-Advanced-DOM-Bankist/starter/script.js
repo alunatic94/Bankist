@@ -9,6 +9,11 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const message=document.createElement('div');
 const header=document.querySelector('.header');
+const btnScrollTo=document.querySelector('.btn--scroll-to');
+const section1=document.getElementById('section--1');
+const tabs=document.querySelectorAll('.operations__tab');
+const tabsContainer=document.querySelector('.operations__tab-container');
+const tabsContent=document.querySelectorAll('.operations__content');
 message.classList.add('cookie-message');
 message.innerHTML=
 'We use cookies to improve performance <button class="btn btn--close-cookie">Got it!</button>';
@@ -40,8 +45,39 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-const x=document.querySelector('.btn--scroll-to');
-const section1=document.getElementById('section--1');
-x.addEventListener('click',function(e){
+//Smooth scroll into section 1
+btnScrollTo.addEventListener('click',function(e){
   section1.scrollIntoView({behavior:"smooth"});
+})
+
+//Page Navigation   
+document.querySelector('.nav__links').addEventListener
+('click',function(e){
+  //Matching strategy
+  if(e.target.classList.contains('nav__link'))
+  {
+    e.preventDefault();
+    const id=e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+      behavior:"smooth"});
+
+  }
+});
+
+//Tabbed Component
+tabsContainer.addEventListener('click',function(e){
+  const clicked=e.target.closest('.operations__tab');
+  //Guard Clause
+  if(!clicked)return;
+  //Active Tab
+  
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+  //Activate content area
+  
+  //Remove active content
+  tabsContent.forEach(t => t.classList.
+  remove('operations__content--active'));
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).
+  classList.add("operations__content--active"); 
 })
